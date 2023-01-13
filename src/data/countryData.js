@@ -5,7 +5,7 @@ const countryData = {
       name: "USA",
       capital: 'Washington DC',
       cost: 1250,
-      details: 'United States are among the most visited (...)',
+      details: 'Capitol of the USA is Washington DC',
       img: 'https://media.istockphoto.com/id/1289724591/photo/aerial-view-of-the-washington-dc-at-night.jpg?s=612x612&w=0&k=20&c=jDvoxjN597_ysSZ5AvuVtdlFd6Gpqr9_PxdIIYLJdlc=',
     },
     {
