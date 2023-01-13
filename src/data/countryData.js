@@ -16,6 +16,30 @@ const countryData = {
       details: 'Capitol of the Netherlands is Amsterdam',
       img: 'https://cdn.pixabay.com/photo/2016/01/19/19/26/amsterdam-1150319__480.jpg',
     },
+    {
+      id: 3,
+      name: "Germany",
+      capital: 'Berlin',
+      cost: 1190,
+      details: 'Capitol of the Germany is Berlin',
+      img: 'https://media.cntraveler.com/photos/5b914e80d5806340ca438db1/4:3/w_3000,h_2250,c_limit/BrandenburgGate_2018_GettyImages-549093677.jpg',
+    },
+    {
+      id: 4,
+      name: "Belgium",
+      capital: 'Brussels',
+      cost: 834,
+      details: 'Capitol of the Belgium is Brussels',
+      img: 'https://media.timeout.com/images/105237721/image.jpg',
+    },
+    {
+      id: 5,
+      name: "Spain",
+      capital: 'Madrid',
+      cost: 1320,
+      details: 'Capitol of the Spain is Madrid',
+      img: 'https://deih43ym53wif.cloudfront.net/cibeles-fountain-madrid-spain-shutterstock_556870582_cf4a306a5b.jpeg',
+    },
 
   ]
 }
