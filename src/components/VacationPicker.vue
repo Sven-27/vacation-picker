@@ -46,7 +46,7 @@ export default {
     },
     getImgUrl(img) {
       console.log(img)
-      return require('../assets/countries/' + img )
+      return require('@/assets/countries/' + img )
     }
   },
    computed: {
