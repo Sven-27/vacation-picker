@@ -26,27 +26,54 @@
          :alt="selectedCountry.img"
          class="img-fluid" /> 
       </li>
+    </ul> 
+    <h2>Other countries:</h2>
+    <input 
+      v-model="newCountry"
+      @keyup.enter="addCountry(newCountry)"
+      class="form-control-lg" 
+      placeholder="New country... "
+    >
+    <button
+      @click="addCountry(newCountry)"
+      class="btn btn-info"
+    >
+      Add country
+    </button>
+    <ul class="list-group">
+      <li 
+        class="list-group-item"
+        v-for="(country, index) in newCountries"
+        :key="index"
+      >
+        {{country}}
+      </li>
     </ul>
+    <p>{{ newCountry }}</p>
   </div>
 </template>
 
 <script>
-import countryData from '@/data/countryData'
+import countryData from '@/data/countryData';
+import mixins from '@/mixins/mixins';
 export default {
   name: "VacationPicker",
+  mixins: [mixins],
   data() {
     return {
       countryData,
-      selectedCountryIndex: 0
+      selectedCountryIndex: 0,
+      newCountry: '',
+      newCountries: []
     }
   },
   methods: {
     selectCountry(index){
       this.selectedCountryIndex = index;
     },
-    getImgUrl(img) {
-      console.log(img)
-      return require('@/assets/countries/' + img )
+    addCountry() {
+      this.newCountries.push(this.newCountry);
+      this.newCountry = '';
     }
   },
    computed: {
