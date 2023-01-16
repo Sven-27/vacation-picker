@@ -1,0 +1,56 @@
+Code that is removed from vacation picker component
+
+<!-- <h2>Other countries:</h2>
+    <input 
+      v-model="newCountry"
+      @keyup.enter="addCountry()"
+      class="form-control-lg" 
+      placeholder="New country... "
+    >
+    <button
+      @click="addCountry()"
+      class="btn btn-info"
+    >
+      Add country
+    </button>
+    <ul class="list-group">
+      <li 
+        class="list-group-item"
+        v-for="(country, index) in newCountries"
+        :key="index"
+      >
+        {{country}}
+      </li>
+    </ul>
+    <p>{{ newCountry }}</p>
+    <h2>Destinations cheaper than:</h2>
+    <select class="form-control-lg" v-model="selectedCost" @change="filterCountries()">
+      <option v-for="cost in costs" :key="cost" :value="cost">
+        {{ cost }}
+      </option>
+    </select>
+    <ul class="list-group">
+      <li 
+        class="list-group-item"
+        v-for="(country, index) in filteredCountries"
+        :key="index"
+      >
+        {{country.name}} (EUR: {{country.cost}})
+      </li>
+    </ul> -->
+
+    From Data()
+   // newCountry: '',
+      // newCountries: [],
+      // selectedCost: 1000,
+      // costs: [1000, 2000, 3000, 4000, 5000],
+      // filteredCountries: [],
+
+    From methods
+    // addCountry() {
+    //   this.newCountries.push(this.newCountry);
+    //   this.newCountry = '';
+    // },
+    // filterCountries() {
+    //   this.filteredCountries = this.countryData.countries.filter(country => country.cost < this.selectedCost);
+    // }

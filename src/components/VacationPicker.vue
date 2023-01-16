@@ -1,70 +1,42 @@
 <template>
-  <div class="container">
-    <h1>Choose your vacation destination</h1>
-    <ul class="list-group">
-      <li 
-        class="list-group-item"
-        v-for="(country, index) in countryData.countries"
-        v-bind:key="country.id"
-        @click="selectCountry(index)"
-      >
-        {{country.id}}
-        {{ country.name }}
-      </li>
-    </ul>
-    <h2>{{selectedCountry.name}}:</h2>
+  <div class="container d-flex flex-column">
+    <h1 class="ps-4">Vacation Picker</h1>
+    <div class="d-flex justify-content-between m-4">
+  <div class="w-50 me-2">
+  <div class="alert alert-warning text-center">
+    <h2>{{selectedCountry.name}}</h2> 
+    <h3>Capital: {{selectedCountry.capital}}</h3>
+      <span v-if="isOnsale" class="badge bg-warning">Sale!</span>
+      <span v-if="isExpensive" class="badge bg-danger">(expensive)</span>
+  </div>
+    <button @click="prevCountry()" type="button" class="btn btn-secondary mt-1 me-1">&#8249;&#8249; Back</button>
+    <button @click="nextCountry()" type="button" class="btn btn-light mt-1 me-1">Next &#8250;&#8250;</button>
+    <button @click="showDetails = !showDetails" type="button" class="btn btn-danger mt-1 me-1">
+      <span v-if="showDetails">Hide details</span>
+      <span v-if="!showDetails">Show details</span>
+    </button>
+  </div>
+  <div class="w-50 ms-2" v-if="showDetails">
+    <h2>{{selectedCountry.name}}</h2>
     <ul class="list-group">
       <li class="list-group-item">{{ selectedCountry.id }}</li>
       <li class="list-group-item">{{ selectedCountry.name }}</li>
       <li class="list-group-item">{{ selectedCountry.capital }}</li>
-      <li class="list-group-item">{{ selectedCountry.details }}</li>
-      <li class="list-group-item" v-show="isExpensive">
-        <span class="badge rounded-pill text-bg-danger">Expensive!</span>
-      </li>
       <li class="list-group-item">
         <img :src="getImgUrl(selectedCountry.img)"
          :alt="selectedCountry.img"
          class="img-fluid w-50" /> 
       </li>
+      <li class="list-group-item">{{ selectedCountry.details }}</li>
+      <li class="list-group-item" v-show="isExpensive">
+        <span class="badge rounded-pill text-bg-danger">Expensive!</span>
+      </li>
+      <li class="list-group-item" v-show="isOnsale">
+        <span class="badge rounded-pill text-bg-danger">Onsale!</span>
+      </li>
     </ul> 
-    <h2>Other countries:</h2>
-    <input 
-      v-model="newCountry"
-      @keyup.enter="addCountry()"
-      class="form-control-lg" 
-      placeholder="New country... "
-    >
-    <button
-      @click="addCountry()"
-      class="btn btn-info"
-    >
-      Add country
-    </button>
-    <ul class="list-group">
-      <li 
-        class="list-group-item"
-        v-for="(country, index) in newCountries"
-        :key="index"
-      >
-        {{country}}
-      </li>
-    </ul>
-    <p>{{ newCountry }}</p>
-    <h2>Destinations cheaper than:</h2>
-    <select class="form-control-lg" v-model="selectedCost" @change="filterCountries()">
-      <option v-for="cost in costs" :key="cost" :value="cost">
-        {{ cost }}
-      </option>
-    </select>
-    <ul class="list-group">
-      <li 
-        class="list-group-item"
-        v-for="(country, index) in filteredCountries"
-        :key="index"
-      >
-        {{country.name}} (EUR: {{country.cost}})
-      </li>
-    </ul>
+    </div>
+    </div>
   </div>
 </template>
 
@@ -78,24 +50,26 @@ export default {
     return {
       countryData,
       selectedCountryIndex: 0,
-      newCountry: '',
-      newCountries: [],
-      selectedCost: 1000,
-      costs: [1000, 2000, 3000, 4000, 5000],
-      filteredCountries: [],
+      showDetails: false
     }
   },
   methods: {
     selectCountry(index){
       this.selectedCountryIndex = index;
     },
-    addCountry() {
-      this.newCountries.push(this.newCountry);
-      this.newCountry = '';
+    prevCountry() {
+      this.selectedCountryIndex--;
+      if (this.selectedCountryIndex < 0) {
+        this.selectedCountryIndex = this.countryData.countries.length - 1;
+      }
     },
-    filterCountries() {
-      this.filteredCountries = this.countryData.countries.filter(country => country.cost < this.selectedCost);
+    nextCountry() {
+      this.selectedCountryIndex++;
+      if (this.selectedCountryIndex > this.countryData.countries.length - 1) {
+        this.selectedCountryIndex = 0;
+      }
     }
+    
   },
    computed: {
     selectedCountry() {
@@ -105,7 +79,10 @@ export default {
       }
     },
     isExpensive() {
-      return this.countryData.countries[this.selectedCountryIndex].cost > 1000;
+      return this.countryData.countries[this.selectedCountryIndex].cost > 3000;
+    },
+    isOnsale() {
+      return this.countryData.countries[this.selectedCountryIndex].cost < 1000;
     }
    }
 }
