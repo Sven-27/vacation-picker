@@ -12,30 +12,30 @@
         {{ country.name }}
       </li>
     </ul>
-    <h2>Selected:</h2>
+    <h2>{{selectedCountry.name}}:</h2>
     <ul class="list-group">
       <li class="list-group-item">{{ selectedCountry.id }}</li>
       <li class="list-group-item">{{ selectedCountry.name }}</li>
       <li class="list-group-item">{{ selectedCountry.capital }}</li>
       <li class="list-group-item">{{ selectedCountry.details }}</li>
-      <li class="list-group-item" v-if="isExpensive">
+      <li class="list-group-item" v-show="isExpensive">
         <span class="badge rounded-pill text-bg-danger">Expensive!</span>
       </li>
       <li class="list-group-item">
         <img :src="getImgUrl(selectedCountry.img)"
          :alt="selectedCountry.img"
-         class="img-fluid" /> 
+         class="img-fluid w-50" /> 
       </li>
     </ul> 
     <h2>Other countries:</h2>
     <input 
       v-model="newCountry"
-      @keyup.enter="addCountry(newCountry)"
+      @keyup.enter="addCountry()"
       class="form-control-lg" 
       placeholder="New country... "
     >
     <button
-      @click="addCountry(newCountry)"
+      @click="addCountry()"
       class="btn btn-info"
     >
       Add country
@@ -50,6 +50,21 @@
       </li>
     </ul>
     <p>{{ newCountry }}</p>
+    <h2>Destinations cheaper than:</h2>
+    <select class="form-control-lg" v-model="selectedCost" @change="filterCountries()">
+      <option v-for="cost in costs" :key="cost" :value="cost">
+        {{ cost }}
+      </option>
+    </select>
+    <ul class="list-group">
+      <li 
+        class="list-group-item"
+        v-for="(country, index) in filteredCountries"
+        :key="index"
+      >
+        {{country.name}} (EUR: {{country.cost}})
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -64,7 +79,10 @@ export default {
       countryData,
       selectedCountryIndex: 0,
       newCountry: '',
-      newCountries: []
+      newCountries: [],
+      selectedCost: 1000,
+      costs: [1000, 2000, 3000, 4000, 5000],
+      filteredCountries: [],
     }
   },
   methods: {
@@ -74,6 +92,9 @@ export default {
     addCountry() {
       this.newCountries.push(this.newCountry);
       this.newCountry = '';
+    },
+    filterCountries() {
+      this.filteredCountries = this.countryData.countries.filter(country => country.cost < this.selectedCost);
     }
   },
    computed: {
