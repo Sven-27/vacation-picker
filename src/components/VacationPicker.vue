@@ -6,7 +6,7 @@
   <div class="alert alert-warning text-center">
     <h2>{{selectedCountry.name}}</h2> 
     <h3>Capital: {{selectedCountry.capital}}</h3>
-      <span v-if="isOnsale" class="badge bg-warning">Sale!</span>
+      <span v-if="isOnsale" class="badge bg-success">Sale!</span>
       <span v-if="isExpensive" class="badge bg-danger">(expensive)</span>
   </div>
     <button @click="prevCountry()" type="button" class="btn btn-secondary mt-1 me-1">&#8249;&#8249; Back</button>
@@ -32,7 +32,8 @@
         <span class="badge rounded-pill text-bg-danger">Expensive!</span>
       </li>
       <li class="list-group-item" v-show="isOnsale">
-        <span class="badge rounded-pill text-bg-danger">Onsale!</span>
+        <span class="badge rounded-pill text-bg-success">
+        Sale!</span>
       </li>
     </ul> 
     </div>
