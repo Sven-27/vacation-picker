@@ -15,6 +15,35 @@
       <span v-if="showDetails">Hide details</span>
       <span v-if="!showDetails">Show details</span>
     </button>
+    <h2 class="mt-5">Other countries:</h2>
+    <input 
+      v-model="newCountry"
+      @keyup.enter="addCountry()"
+      class="form-control-lg me-2" 
+      placeholder="New country... "
+    >
+    <button
+      @click="addCountry()"
+      class="btn btn-info"
+    >
+      Add country
+    </button>
+    <ul class="list-group mt-3">
+      <li 
+        class="list-group-item d-flex justify-content-between align-items-center"
+        v-for="(country, index) in newCountries"
+        :key="index"
+      >
+        {{country}}
+        <button 
+          @click="removeCountry(index)"
+          type="button" 
+          class="btn btn-primary"
+        >
+          Verwijder
+        </button>
+      </li>
+    </ul>
   </div>
   <div class="w-50 ms-2" v-if="showDetails">
     <h2>{{selectedCountry.name}}</h2>
@@ -51,7 +80,9 @@ export default {
     return {
       countryData,
       selectedCountryIndex: 0,
-      showDetails: false
+      showDetails: false,
+      newCountry: '',
+      newCountries: [],
     }
   },
   methods: {
@@ -69,8 +100,14 @@ export default {
       if (this.selectedCountryIndex > this.countryData.countries.length - 1) {
         this.selectedCountryIndex = 0;
       }
+    },
+    addCountry() {
+      this.newCountries.push(this.newCountry);
+      this.newCountry = '';
+    },    
+    removeCountry(index) {
+      this.newCountries.splice(index, 1);
     }
-    
   },
    computed: {
     selectedCountry() {
