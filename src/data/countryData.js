@@ -7,6 +7,7 @@ const countryData = {
       cost: 3250,
       details: 'Capitol of the USA is Washington DC',
       img: 'washington.jpg',
+      rating: 0,
     },
     {
       id: 2,
@@ -15,6 +16,7 @@ const countryData = {
       cost: 750,
       details: 'Capitol of the Netherlands is Amsterdam',
       img: 'amsterdam.jpg',
+      rating: 0,
     },
     {
       id: 3,
@@ -23,6 +25,7 @@ const countryData = {
       cost: 4190,
       details: 'Capitol of the Germany is Berlin',
       img: 'berlijn.webp',
+      rating: 0,
     },
     {
       id: 4,
@@ -31,6 +34,7 @@ const countryData = {
       cost: 834,
       details: 'Capitol of the Belgium is Brussels',
       img: 'brussel.jpg',
+      rating: 0,
     },
     {
       id: 5,
@@ -39,6 +43,7 @@ const countryData = {
       cost: 1320,
       details: 'Capitol of the Spain is Madrid',
       img: 'madrid.jpeg',
+      rating: 0,
     },
 
   ]
