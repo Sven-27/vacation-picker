@@ -1,5 +1,5 @@
 <template>
-<div class="w-50 ms-2">
+<div class="w-100 ms-2">
     <h2>{{country.name}}</h2>
     <ul class="list-group">
       <li class="list-group-item d-flex justify-content-between">
@@ -14,7 +14,7 @@
       <li class="list-group-item">
         <img :src="getImgUrl(country.img)"
          :alt="country.img"
-         class="img-fluid w-50" /> 
+         class="img-fluid w-100" /> 
       </li>
       <li class="list-group-item">{{ country.details }}</li>
       <li class="list-group-item" v-show="expensive">

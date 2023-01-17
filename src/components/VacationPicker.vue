@@ -51,7 +51,7 @@
         </li>
       </ul>
     </div>
-    
+    <CollapsibleSection>
     <CountryDetail 
       v-if="showDetails"
       :country="selectedCountry"
@@ -59,6 +59,7 @@
       :sale="isOnsale"
       @rating="onRating($event)"
     />
+    </CollapsibleSection>
     </div>
   </div>
 </template>
@@ -66,11 +67,14 @@
 <script>
 import countryData from '@/data/countryData';
 import CountryDetail from '@/components/CountryDetail.vue';
+import CollapsibleSection from '@/components/shared/CollapsibleSection.vue'
 
 export default {
   name: "VacationPicker",
-  components: {CountryDetail},
-  
+  components: {
+    CountryDetail,
+    CollapsibleSection,
+    },  
   data() {
     return {
       countryData,
