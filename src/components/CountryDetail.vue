@@ -5,6 +5,7 @@
       <li class="list-group-item d-flex justify-content-between">
         {{ country.id }}
         <span class="float-right">
+          <button @click="setFavorite()" type="button" class="btn btn-primary me-2">Favorite</button>
           <button @click="setRating(-1)" type="button" class="btn btn-danger me-2">-1</button>
           <button @click="setRating(1)" type="button" class="btn btn-success">+1</button>
         </span>
@@ -30,7 +31,7 @@
 import mixins from '@/mixins/mixins';
 export default {
   name: "CountryDetail",
-  emits: ['rating'],
+  emits: ['rating', 'favorite'],
   mixins: [mixins],
   props: {
     country: [],
@@ -40,6 +41,9 @@ export default {
   methods: {
     setRating(value) {
       this.$emit('rating', value);
+    },
+    setFavorite() {
+      this.$emit('favorite')
     }
   }
 }

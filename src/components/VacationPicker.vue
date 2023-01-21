@@ -14,13 +14,16 @@
               v-if="selectedCountry.rating !== 0"  
             >Rating: {{ selectedCountry.rating }}</span>
           </li>
+          <li class="list-group-item" v-if="selectedCountry.favorite">
+            <span class="badge text-bg-success">Favorite</span>
+          </li>
       </div>
       <button @click="prevCountry()" type="button" class="btn btn-secondary mt-1 me-1">&#8249;&#8249; Back</button>
-      <button @click="nextCountry()" type="button" class="btn btn-light mt-1 me-1">Next &#8250;&#8250;</button>
-      <button @click="showDetails = !showDetails" type="button" class="btn btn-danger mt-1 me-1">
+      <button @click="nextCountry()" type="button" class="btn btn-danger mt-1 me-1">Next &#8250;&#8250;</button>
+      <!-- <button @click="showDetails = !showDetails" type="button" class="btn btn-danger mt-1 me-1">
         <span v-if="showDetails">Hide details</span>
         <span v-if="!showDetails">Show details</span>
-      </button>
+      </button> -->
       <h2 class="mt-5">Other countries:</h2>
       <input 
         v-model="newCountry"
@@ -52,12 +55,14 @@
       </ul>
     </div>
     <CollapsibleSection>
+    <!-- v-if="showDetails" in countryDetails below -->
     <CountryDetail 
-      v-if="showDetails"
+      
       :country="selectedCountry"
       :expensive="isExpensive"
       :sale="isOnsale"
       @rating="onRating($event)"
+      @favorite="onFavorite()"
     />
     </CollapsibleSection>
     </div>
@@ -79,7 +84,7 @@ export default {
     return {
       countryData,
       selectedCountryIndex: 0,
-      showDetails: true,
+      // showDetails: true,
       newCountry: '',
       newCountries: [],
     }
@@ -109,7 +114,12 @@ export default {
     },
     onRating(rating) {
       this.countryData.countries[this.selectedCountryIndex].rating += rating;
-    }
+    },
+    onFavorite() {
+         this.countryData.countries[this.selectedCountryIndex].favorite = !this.countryData.countries[this.selectedCountryIndex].favorite
+
+      // console.log(favorite)
+    },
   },
    computed: {
     selectedCountry() {
